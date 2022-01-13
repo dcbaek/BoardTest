@@ -13,6 +13,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 
@@ -40,6 +41,9 @@ class UserApiControllerTest {
         userRepository.deleteAll();
     }
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Test
     public void User_가입완료_테스트() throws Exception {
         //given
@@ -48,7 +52,7 @@ class UserApiControllerTest {
 
         UserSaveRequestDto userSaveRequestDto = UserSaveRequestDto.builder()
                 .username(username)
-                .password("1234")
+                .password(bCryptPasswordEncoder.encode("1234"))
                 .email("test@1234.com")
                 .nickname(nickname)
                 .role(Role.USER)
