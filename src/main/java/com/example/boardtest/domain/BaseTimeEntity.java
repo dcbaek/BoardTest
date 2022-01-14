@@ -15,9 +15,12 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseTimeEntity {
 
+    // 생성할 때 자동 저장
     @CreatedDate
     private LocalDateTime createDate;
 
+    // 수정할 때 자동 저장
     @LastModifiedDate
     private LocalDateTime modifiedDate;
+
 }

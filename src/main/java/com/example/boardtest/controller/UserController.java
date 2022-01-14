@@ -13,5 +13,12 @@ public class UserController {
     @GetMapping("/auth/user/login")
     public String userLogin() {
         return "layout/user/user-login";
+
+    }
+
+
+    @GetMapping("/user/update")
+    public String userUpdate() {
+        return "layout/user/user-update";
     }
 }
