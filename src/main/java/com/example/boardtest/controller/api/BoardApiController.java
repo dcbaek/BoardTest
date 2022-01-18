@@ -31,6 +31,6 @@ public class BoardApiController {
 
     @PutMapping("/api/v1/board/{id}")
     public Long update(@PathVariable Long id, @RequestBody BoardUpdateRequestDto boardUpdateRequestDto) {
-        return boardService.update(id, boardService);
+        return boardService.update(id, boardUpdateRequestDto); //boardService에서 Dto로변경
     }
 }

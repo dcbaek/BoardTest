@@ -66,6 +66,8 @@ public class PrincipalDetail implements UserDetails {
     public void setUser(User userEntity) {
     }
 
-    public User getUser() {
+    public User getUser(){
+        return user;
     }
+
 }

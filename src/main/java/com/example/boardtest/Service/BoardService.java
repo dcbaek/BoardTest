@@ -6,6 +6,8 @@ import com.example.boardtest.domain.user.User;
 import com.example.boardtest.dto.board.BoardSaveRequestDto;
 import com.example.boardtest.dto.board.BoardUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,9 +39,15 @@ public class BoardService {
         boardRepository.deleteById(id);
     }
 
+    @Transactional
     public Long update(Long id, BoardUpdateRequestDto boardUpdateRequestDto) {
-        Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 id가 없습니다. id = " + id));
+        Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 id가 없습니다. id=" + id));
         board.update(boardUpdateRequestDto.getTitle(), boardUpdateRequestDto.getContent());
         return id;
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Board> findByTitleContainingOrContentContaining(String title, String content, Pageable pageable) {
+        return boardRepository.findByTitleContainingOrContentContaining(title, content, pageable);
     }
 }
